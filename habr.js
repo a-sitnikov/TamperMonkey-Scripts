@@ -1,15 +1,15 @@
 // ==UserScript==
 // @name         habrahabr.ru
 // @namespace    http://tampermonkey.net/
-// @version      1.1
+// @version      1.1.2
 // @description  Flat view of comments + tooltips
 // @author       a.sitnikov
 // @match        habrahabr.ru/*
 // @match        geektimes.ru/*
 // @grant        none
 // @require      https://code.jquery.com/ui/1.12.1/jquery-ui.min.js
-// @downloadURL  https://gist.githubusercontent.com/a-sitnikov/66306e0086c50fde16af3f0646368509/raw/
-// @updateURL    https://gist.githubusercontent.com/a-sitnikov/66306e0086c50fde16af3f0646368509/raw/
+// @downloadURL  https://cdn.jsdelivr.net/gh/a-sitnikov/TamperMonkey-Scripts@latest/habr.js
+// @updateURL    https://cdn.jsdelivr.net/gh/a-sitnikov/TamperMonkey-Scripts@latest/habr.js
 // ==/UserScript==
 
 let tooltipsOrder = [];
