@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         habrahabr.ru
 // @namespace    http://tampermonkey.net/
-// @version      1.2
+// @version      1.2.2
 // @description  Flat view of comments + tooltips
 // @author       a.sitnikov
 // @match        habrahabr.ru/*
@@ -50,15 +50,13 @@ function tooltipHtml(msgId) {
 function createTooltip(link, msgId) {
 
     let loc = link.offset();
-    let left = loc.left;
-    if ($(window).width() - loc.left < 100) {
-        left = left - 630;
-    }
+    let left = loc.left - 350;
+    let top = loc.top - 80;
 
     let tooltip = $(`#tooltip_id${msgId}`);
     if (tooltip.length > 0) {
         tooltip.css({
-            "top": loc.top + "px",
+            "top": top + "px",
             "left": left + "px"
             //"z-index": "999"
         });
@@ -70,7 +68,7 @@ function createTooltip(link, msgId) {
     let elem = tooltip
     .draggable()
     .css({
-        "top": loc.top + "px",
+        "top": top + "px",
         "left": left + "px",
         "z-index": "999"
     })
