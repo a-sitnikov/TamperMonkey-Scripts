@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         habrahabr.ru
 // @namespace    http://tampermonkey.net/
-// @version      1.1.2
+// @version      1.2
 // @description  Flat view of comments + tooltips
 // @author       a.sitnikov
 // @match        habrahabr.ru/*
@@ -180,7 +180,7 @@ function hideNodes(enableMinRating, minRating) {
         let nodeNumberElem = $(`<span class="user-info__nickname_comment">${i1}.</span>`).insertBefore(node.find("a.user-info"));
         nodeNumberElem.css({"margin-right": "5px"});
 
-        if (parentId !== "0") {
+        if (parentId !== "0" && parentNumber) {
             let parentLink = $(`<a href="#comment_${parentId}" linkid=${parentId}>(${parentNumber})</a>`);
             parentLink = parentLink.insertBefore(node.find("div.voting-wjt"));
             attachTooltip(parentLink, parentId, loadDataMsg(parentId));
