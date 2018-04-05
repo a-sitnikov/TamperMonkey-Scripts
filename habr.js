@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         habrahabr.ru
 // @namespace    http://tampermonkey.net/
-// @version      1.2.3
+// @version      1.3.1
 // @description  Flat view of comments + tooltips
 // @author       a.sitnikov
 // @match        habrahabr.ru/*
@@ -50,7 +50,11 @@ function tooltipHtml(msgId) {
 function createTooltip(link, msgId) {
 
     let loc = link.offset();
-    let left = loc.left - 350;
+    let left;
+    if (loc.left > 360)
+        left = loc.left - 350;
+    else
+        left = 10;
     let top = loc.top - 80;
 
     let tooltip = $(`#tooltip_id${msgId}`);
@@ -160,16 +164,19 @@ function hideNodes(enableMinRating, minRating) {
     arr.sort((x, y) => (x.date > y.date));
 
     let commentNumbers = new Map();
+    arr.each((i, val) => {
+        commentNumbers.set(val.nodeId, +i+1);
+    });
 
     let parent = $("#comments-list");
     parent.empty();
+
     for (let i in arr) {
 
         let {node, nodeId, parentId, rating} = arr[i];
         if (!node) continue;
 
         let i1 = +i + 1;
-        commentNumbers.set(nodeId, i1);
         let parentNumber = commentNumbers.get(parentId);
 
         node.data({nodeId, rating});
@@ -182,6 +189,21 @@ function hideNodes(enableMinRating, minRating) {
             let parentLink = $(`<a href="#comment_${parentId}" linkid=${parentId}>(${parentNumber})</a>`);
             parentLink = parentLink.insertBefore(node.find("div.voting-wjt"));
             attachTooltip(parentLink, parentId, loadDataMsg(parentId));
+        }
+
+        const childrenNodes = arr.filter((i, val) => val.parentId === nodeId);
+        if (childrenNodes.length > 0) {
+            let elem = node.append($('<span>Ответы: </span>').css({"color": "#487284"}));
+            for (let j=0; j<childrenNodes.length; j++) {
+                const childNode = childrenNodes[j];
+                const childNumber = commentNumbers.get(childNode.nodeId);
+                //let div = childNode.node; //.find('div.comment');
+                //let childNumberElem = $(`<span>${childNumber}.</span>`).css({"margin": " auto 5px auto 25px"});
+                //div = div.prepend(childNumberElem);
+                let div = $(`<a href="#comment_${childNode.nodeId}" linkid=${childNode.nodeId}>(${childNumber})</a>`).css({"margin": "0px 5px"});
+                node.append(div);
+                attachTooltip(div, childNode.nodeId, loadDataMsg(childNode.nodeId));
+            }
         }
     }
 
