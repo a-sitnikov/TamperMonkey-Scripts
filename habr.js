@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         habrahabr.ru
 // @namespace    http://tampermonkey.net/
-// @version      1.3.1
+// @version      1.3.2
 // @description  Flat view of comments + tooltips
 // @author       a.sitnikov
 // @match        habrahabr.ru/*
@@ -49,12 +49,9 @@ function tooltipHtml(msgId) {
 
 function createTooltip(link, msgId) {
 
+    let locDiv = $("div.comment").offset();
     let loc = link.offset();
-    let left;
-    if (loc.left > 360)
-        left = loc.left - 350;
-    else
-        left = 10;
+    let left = locDiv.left + 10;
     let top = loc.top - 80;
 
     let tooltip = $(`#tooltip_id${msgId}`);
@@ -191,9 +188,8 @@ function hideNodes(enableMinRating, minRating) {
             attachTooltip(parentLink, parentId, loadDataMsg(parentId));
         }
 
-        const childrenNodes = arr.filter((i, val) => val.parentId === nodeId);
+        const childrenNodes = arr.filter((i, val) => val.parentId === nodeId).sort((x, y) => x.nodeId > y.nodeId);
         if (childrenNodes.length > 0) {
-            let elem = node.append($('<span>Ответы: </span>').css({"color": "#487284"}));
             for (let j=0; j<childrenNodes.length; j++) {
                 const childNode = childrenNodes[j];
                 const childNumber = commentNumbers.get(childNode.nodeId);
@@ -201,7 +197,8 @@ function hideNodes(enableMinRating, minRating) {
                 //let childNumberElem = $(`<span>${childNumber}.</span>`).css({"margin": " auto 5px auto 25px"});
                 //div = div.prepend(childNumberElem);
                 let div = $(`<a href="#comment_${childNode.nodeId}" linkid=${childNode.nodeId}>(${childNumber})</a>`).css({"margin": "0px 5px"});
-                node.append(div);
+                let replyLink = node.find('a[href="#reply"]');
+                div.insertBefore(replyLink);
                 attachTooltip(div, childNode.nodeId, loadDataMsg(childNode.nodeId));
             }
         }
