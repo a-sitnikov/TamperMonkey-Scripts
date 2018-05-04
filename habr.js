@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         habrahabr.ru
 // @namespace    http://tampermonkey.net/
-// @version      1.3.2
+// @version      1.3.3
 // @description  Flat view of comments + tooltips
 // @author       a.sitnikov
 // @match        habr.com/*
