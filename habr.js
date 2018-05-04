@@ -4,8 +4,8 @@
 // @version      1.3.2
 // @description  Flat view of comments + tooltips
 // @author       a.sitnikov
-// @match        habrahabr.ru/*
-// @match        geektimes.ru/*
+// @match        habr.com/*
+// @match        geektimes.com/*
 // @grant        none
 // @require      https://code.jquery.com/ui/1.12.1/jquery-ui.min.js
 // @downloadURL  https://cdn.jsdelivr.net/gh/a-sitnikov/TamperMonkey-Scripts@latest/habr.js
