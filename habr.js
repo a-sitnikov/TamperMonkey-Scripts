@@ -11,6 +11,7 @@
 // @downloadURL  https://cdn.jsdelivr.net/gh/a-sitnikov/TamperMonkey-Scripts@latest/habr.js
 // @updateURL    https://cdn.jsdelivr.net/gh/a-sitnikov/TamperMonkey-Scripts@latest/habr.js
 // ==/UserScript==
+/* global $ */
 
 let tooltipsOrder = [];
 let tooltipsMap = {};
