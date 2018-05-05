@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         habrahabr.ru
 // @namespace    http://tampermonkey.net/
-// @version      1.3.3
+// @version      1.3.4
 // @description  Flat view of comments + tooltips
 // @author       a.sitnikov
 // @match        habr.com/*
@@ -223,7 +223,7 @@ function hideNodes(enableMinRating, minRating) {
         let enableMinRating = $('#enableMinRating').is(':checked');
         let minRating = $('#minRating').val();
         hideNodes(enableMinRating, +minRating);
-        localStorage.setItem('minRating', value);
+        localStorage.setItem('minRating', minRating);
     });
     $('span.checkbox-group')
         .append(checkbox)
