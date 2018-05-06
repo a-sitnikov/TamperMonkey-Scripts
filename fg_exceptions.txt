@@ -1,0 +1,16 @@
+ip.fri-gate.org
+*.2ip.ru [RU]
+*.rutracker.org [DE,FR,NL,US]
+new-rutor.org [DE,FR,NL,US]
+*.kinozal.tv [DE,FR,NL,US]
+*.kinozal.me [DE,FR,NL,US]
+pirat.ca [DE,FR,NL,US]
+marketplace.visualstudio.com [DE,FR,NL,US]
+*.evernote.com
+*.az764295.vo.msecnd.net
+*.vscode-update.azurewebsites.net
+*.photos.app.goo.gl
+*.gstatic.com  //drive.google.com
+*.accounts.firefox.com
+*.accounts-static.cdn.mozilla.net  //accounts.firefox.com
+*.antizapret.prostovpn.org
